@@ -6,26 +6,35 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val et1 = findViewById<EditText>(R.id.et1)
-        val et2 = findViewById<EditText>(R.id.et2)
-        val tv1 = findViewById<TextView>(R.id.tv1)
+        var auxiliarEntrada = 0
+        var contador: Int = 1
+        val toast = Toast.makeText(this , "Numero insertado" , Toast.LENGTH_SHORT)
 
-        et2.doAfterTextChanged {
-            val primerNumero = et1.text.toString()
-            val segundoNumero = et2.text.toString()
+        for (i in 1..10) {
+            button.setOnClickListener {
+                if (contador <= 10){
+                    toast.cancel()
+                    val entrada = et1.text.toString().toInt()
+                    auxiliarEntrada = auxiliarEntrada + entrada
 
-            if (primerNumero > segundoNumero){
-                tv1.text = "El PRIMER numero es mayor."
-            } else {
-                tv1.text = "El SEGUNDO numero es mayor."
+                    contador++
+                    toast.show()
+                } else {
+                    Toast.makeText(this, "Has llegado al limite de Numeros", Toast.LENGTH_SHORT).show()
+                    val media = auxiliarEntrada / 10
+                    tv1.text = "La media equivale a $media"
+                }
             }
         }
+
     }
 }
